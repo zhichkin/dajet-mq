@@ -6,5 +6,5 @@ RETURNS nvarchar(128)
 AS
 BEGIN
     DECLARE @broker_guid AS uniqueidentifier = [dbo].[fn_service_broker_uuid]();
-    RETURN CAST (@broker_guid AS nvarchar(36)) + N'/queue/' + @name;
+    RETURN LOWER(CAST(@broker_guid AS nvarchar(36))) + N'/queue/' + @name;
 END;

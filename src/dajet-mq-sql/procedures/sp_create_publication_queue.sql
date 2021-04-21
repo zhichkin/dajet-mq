@@ -15,21 +15,9 @@ BEGIN
 
     IF NOT EXISTS(SELECT 1 FROM sys.services WHERE [name] = @service_name)
     BEGIN
-        EXECUTE('CREATE SERVICE [' + @service_name + '] ON QUEUE [' + @queue_name + '] ([DEFAULT]);
-		         GRANT CONTROL ON SERVICE::[' + @service_name + '] TO [' + @user_name + '];
-		         GRANT SEND ON SERVICE::[' + @service_name + '] TO [PUBLIC];');
+        EXECUTE('CREATE SERVICE [' + @service_name + '] ON QUEUE [' + @queue_name + '] ([DEFAULT]);');
+		         --GRANT CONTROL ON SERVICE::[' + @service_name + '] TO [' + @user_name + '];
+		         --GRANT SEND ON SERVICE::[' + @service_name + '] TO [PUBLIC];');
     END;
-
-  --  DECLARE @handle AS UNIQUEIDENTIFIER = [dbo].[fn_get_dialog_handle](@queue_name);
-  --  DECLARE @broker_guid AS NVARCHAR (36) = CAST ([dbo].[fn_service_broker_guid]() AS NVARCHAR (36));
-  --  IF (@handle IS NULL
-  --      OR @handle = CAST ('00000000-0000-0000-0000-000000000000' AS UNIQUEIDENTIFIER))
-  --      BEGIN
-  --          DECLARE @sql AS NVARCHAR (1024) = 'BEGIN DIALOG @handle_out
-		--FROM SERVICE [' + @default_service_name + ']
-		--TO SERVICE ''' + @service_name + ''', ''' + @broker_guid + '''
-		--ON CONTRACT [DEFAULT]
-		--WITH ENCRYPTION = OFF;';
-  --          EXECUTE sp_executesql @sql, N'@handle_out uniqueidentifier OUTPUT', @handle_out = @handle OUTPUT;
-  --      END
+  
 END;

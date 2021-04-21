@@ -63,6 +63,7 @@
     <Folder Include="tables" />
     <Folder Include="procedures" />
     <Folder Include="functions" />
+    <Folder Include="triggers" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\publications.sql" />
@@ -88,5 +89,8 @@
     <Build Include="functions\fn_create_service_name.sql" />
     <Build Include="functions\fn_sql_to_1c_uuid.sql" />
     <Build Include="functions\fn_publication_dialog_handle.sql" />
+    <Build Include="procedures\sp_create_article.sql" />
+    <Build Include="procedures\sp_create_publication_queue_dialogs.sql" />
+    <Build Include="triggers\tr_after_template_trigger.sql" />
   </ItemGroup>
 </Project>

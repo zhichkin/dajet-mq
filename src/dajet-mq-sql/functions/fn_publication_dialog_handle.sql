@@ -23,3 +23,12 @@ BEGIN
 
     RETURN @handle;
 END;
+
+--DECLARE @counter SMALLINT;  
+--SET @counter = 1;  
+--WHILE @counter < 5  
+--   BEGIN  
+--      SELECT floor(rand()*(@max_integer - @min_integer + 1) + @min_integer) Random_Number  
+--      SET @counter = @counter + 1  
+--   END;  
+--GO

@@ -1,6 +1,5 @@
-﻿CREATE TABLE [dbo].[dajet_articles]
+﻿CREATE TABLE [dbo].[articles]
 (
-	[id] int NOT NULL PRIMARY KEY,
-	[name] nvarchar(128) UNIQUE NOT NULL,
+	[name] nvarchar(128) NOT NULL PRIMARY KEY,
 	[table_name] nvarchar(128) NOT NULL
 );

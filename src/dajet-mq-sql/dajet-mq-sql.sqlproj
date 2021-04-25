@@ -64,14 +64,13 @@
     <Folder Include="procedures" />
     <Folder Include="functions" />
     <Folder Include="triggers" />
+    <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\publications.sql" />
     <Build Include="tables\articles.sql" />
-    <Build Include="tables\publications-articles.sql" />
     <Build Include="procedures\sp_create_publication.sql" />
     <Build Include="procedures\sp_publish_article.sql" />
-    <Build Include="tables\dialogs.sql" />
     <Build Include="procedures\sp_create_publication_queue.sql" />
     <Build Include="procedures\sp_create_default_user.sql" />
     <Build Include="functions\fn_service_broker_uuid.sql" />
@@ -90,7 +89,18 @@
     <Build Include="functions\fn_sql_to_1c_uuid.sql" />
     <Build Include="functions\fn_publication_dialog_handle.sql" />
     <Build Include="procedures\sp_create_article.sql" />
-    <Build Include="procedures\sp_create_publication_queue_dialogs.sql" />
-    <Build Include="triggers\tr_after_template_trigger.sql" />
+    <Build Include="procedures\sp_create_dialog.sql" />
+    <Build Include="triggers\publication_trigger_template.sql" />
+    <Build Include="scripts\create_public_endpoint.sql" />
+    <Build Include="tables\udt_articles.sql" />
+    <Build Include="procedures\sp_create_publication_trigger.sql" />
+    <Build Include="procedures\sp_create_message_type.sql" />
+    <Build Include="procedures\sp_create_publication_dialog.sql" />
+    <Build Include="tables\publication_dialogs.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="scripts\drop_public_endpoint.sql" />
+    <None Include="scripts\create_schema.sql" />
+    <None Include="scripts\setup_dajet_mq.sql" />
   </ItemGroup>
 </Project>

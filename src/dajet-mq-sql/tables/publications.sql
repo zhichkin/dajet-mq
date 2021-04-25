@@ -1,5 +1,4 @@
-﻿CREATE TABLE [dbo].[dajet_publications]
+﻿CREATE TABLE [dbo].[publications]
 (
-	[id] int NOT NULL PRIMARY KEY,
-	[name] nvarchar(128) NOT NULL UNIQUE
+	[name] nvarchar(128) NOT NULL PRIMARY KEY
 );

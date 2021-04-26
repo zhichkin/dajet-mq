@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[sp_create_publication]
-	@name nvarchar(128) NOT NULL,
-	@articles udt_articles NOT NULL READONLY 
+	@name nvarchar(128),
+	@articles udt_articles READONLY 
 AS
 BEGIN
 	SET NOCOUNT ON;

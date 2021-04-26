@@ -62,7 +62,6 @@
     <Folder Include="Properties" />
     <Folder Include="tables" />
     <Folder Include="procedures" />
-    <Folder Include="functions" />
     <Folder Include="triggers" />
     <Folder Include="scripts" />
     <Folder Include="queues" />
@@ -73,7 +72,6 @@
     <None Include="triggers\publication_trigger_template.sql" />
     <Build Include="tables\articles_udt.sql" />
     <Build Include="tables\publication_dialogs.sql" />
-    <Build Include="functions\fn_has_updated_columns.sql" />
     <Build Include="tables\publications_ix_1.sql" />
     <Build Include="tables\articles_ix_1.sql" />
     <Build Include="tables\publication_dialogs_ix_1.sql" />
@@ -84,8 +82,9 @@
     <Build Include="procedures\sp_create_publication_dialog.sql" />
     <Build Include="procedures\sp_create_publication_trigger.sql" />
     <Build Include="procedures\sp_publish_message.sql" />
+    <Build Include="tables\articles_ix_2.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="scripts\enable_broker.sql" />
+    <Build Include="scripts\enable_broker.sql" />
   </ItemGroup>
 </Project>

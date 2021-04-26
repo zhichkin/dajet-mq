@@ -12,7 +12,10 @@ BEGIN
 
 	-- find dialog handles to send message on the publication queue
 	DECLARE @dialogs TABLE([id] int IDENTITY(1,1), [handle] uniqueidentifier);
-	INSERT @dialogs ([handle]) SELECT [dialog_handle] FROM [publication_dialogs] WHERE [article_name] = @table_name;
+	INSERT @dialogs ([handle])
+	SELECT [dialog_handle] FROM [publication_dialogs] AS d
+	INNER JOIN [articles] AS a ON d.[article_name] = a.[name]
+	WHERE a.[table_name] = @table_name;
 	IF NOT EXISTS(SELECT 1 FROM @dialogs) RETURN 0; -- this might be setup error
 
 	-- send message on publication dialogs

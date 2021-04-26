@@ -1,0 +1,1 @@
+﻿CREATE UNIQUE NONCLUSTERED INDEX [ix_articles_2] ON [dbo].[articles] ([table_name] ASC);

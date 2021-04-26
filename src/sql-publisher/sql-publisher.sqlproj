@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>dajet-mq-sql</Name>
+    <Name>sql-publisher</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{19ab9ff9-d6d2-49c2-99a5-abea06d91f90}</ProjectGuid>
@@ -65,42 +65,27 @@
     <Folder Include="functions" />
     <Folder Include="triggers" />
     <Folder Include="scripts" />
+    <Folder Include="queues" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\publications.sql" />
     <Build Include="tables\articles.sql" />
-    <Build Include="procedures\sp_create_publication.sql" />
-    <Build Include="procedures\sp_publish_article.sql" />
-    <Build Include="procedures\sp_create_publication_queue.sql" />
-    <Build Include="procedures\sp_create_default_user.sql" />
-    <Build Include="functions\fn_service_broker_uuid.sql" />
-    <Build Include="functions\fn_service_broker_port.sql" />
-    <Build Include="functions\fn_default_user_name.sql" />
-    <Build Include="procedures\sp_create_default_certificate.sql" />
-    <Build Include="functions\fn_default_certificate_name.sql" />
-    <Build Include="functions\fn_default_certificate_data.sql" />
-    <Build Include="procedures\sp_create_remote_user.sql" />
-    <Build Include="procedures\sp_create_route.sql" />
-    <Build Include="procedures\sp_delete_route.sql" />
-    <Build Include="procedures\sp_delete_queue.sql" />
-    <Build Include="procedures\sp_create_queue.sql" />
-    <Build Include="functions\fn_create_queue_name.sql" />
-    <Build Include="functions\fn_create_service_name.sql" />
-    <Build Include="functions\fn_sql_to_1c_uuid.sql" />
-    <Build Include="functions\fn_publication_dialog_handle.sql" />
-    <Build Include="procedures\sp_create_article.sql" />
-    <Build Include="procedures\sp_create_dialog.sql" />
-    <Build Include="triggers\publication_trigger_template.sql" />
-    <Build Include="scripts\create_public_endpoint.sql" />
-    <Build Include="tables\udt_articles.sql" />
-    <Build Include="procedures\sp_create_publication_trigger.sql" />
-    <Build Include="procedures\sp_create_message_type.sql" />
-    <Build Include="procedures\sp_create_publication_dialog.sql" />
+    <None Include="triggers\publication_trigger_template.sql" />
+    <Build Include="tables\articles_udt.sql" />
     <Build Include="tables\publication_dialogs.sql" />
+    <Build Include="functions\fn_has_updated_columns.sql" />
+    <Build Include="tables\publications_ix_1.sql" />
+    <Build Include="tables\articles_ix_1.sql" />
+    <Build Include="tables\publication_dialogs_ix_1.sql" />
+    <Build Include="queues\publication_queue.sql" />
+    <Build Include="queues\publication_service.sql" />
+    <Build Include="procedures\sp_create_message_type.sql" />
+    <Build Include="procedures\sp_create_publication.sql" />
+    <Build Include="procedures\sp_create_publication_dialog.sql" />
+    <Build Include="procedures\sp_create_publication_trigger.sql" />
+    <Build Include="procedures\sp_publish_message.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="scripts\drop_public_endpoint.sql" />
-    <None Include="scripts\create_schema.sql" />
-    <None Include="scripts\setup_dajet_mq.sql" />
+    <None Include="scripts\enable_broker.sql" />
   </ItemGroup>
 </Project>

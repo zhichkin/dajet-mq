@@ -1,0 +1,1 @@
+﻿CREATE SERVICE [publication_service] ON QUEUE [publication_queue] ([DEFAULT]);

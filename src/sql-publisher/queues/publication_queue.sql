@@ -1,0 +1,1 @@
+﻿CREATE QUEUE [publication_queue] WITH POISON_MESSAGE_HANDLING (STATUS = OFF);

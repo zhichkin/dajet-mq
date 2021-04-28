@@ -1,0 +1,23 @@
+﻿CREATE PROCEDURE [dbo].[sp_delete_publication]
+	@name nvarchar(128)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SET XACT_ABORT ON;
+
+	BEGIN TRY
+	BEGIN TRANSACTION;
+
+		DELETE [publications] WHERE [name] = @name;
+
+
+
+	COMMIT TRANSACTION;
+	END TRY
+	BEGIN CATCH
+		IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION;
+		THROW;
+	END CATCH;
+
+END;

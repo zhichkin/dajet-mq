@@ -4,6 +4,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	-- TODO: create insert, update and delete triggers separately
+
 	DECLARE @trigger_name nvarchar(128) = @table_name + N'_after_all';
 
 	EXECUTE(N'IF EXISTS(SELECT 1 FROM sys.triggers WHERE [name] = N''' + @trigger_name + N''') DROP TRIGGER [' + @trigger_name + N'];');
@@ -32,3 +34,13 @@ BEGIN
 
 	EXECUTE(N'ENABLE TRIGGER [' + @trigger_name + N'] ON [' + @table_name + N'];');
 END;
+
+--DECLARE @message xml =
+--(SELECT
+--  N'Справочник.Номенклатура' AS [type],
+--	N'delete' AS [operation],
+--	(SELECT
+--		number AS num,
+--		bin    AS bin
+--	FROM @numbers FOR XML RAW(N'row'), TYPE, BINARY BASE64) AS rows
+--FOR XML RAW(N'message'), TYPE);

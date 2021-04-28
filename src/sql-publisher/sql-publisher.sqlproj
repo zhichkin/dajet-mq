@@ -65,24 +65,28 @@
     <Folder Include="triggers" />
     <Folder Include="scripts" />
     <Folder Include="queues" />
+    <Folder Include="functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\publications.sql" />
     <Build Include="tables\articles.sql" />
     <None Include="triggers\publication_trigger_template.sql" />
     <Build Include="tables\articles_udt.sql" />
-    <Build Include="tables\publication_dialogs.sql" />
+    <Build Include="tables\publication_article_usages.sql" />
     <Build Include="tables\publications_ix_1.sql" />
     <Build Include="tables\articles_ix_1.sql" />
-    <Build Include="tables\publication_dialogs_ix_1.sql" />
+    <Build Include="tables\publication_article_usages_ix_0.sql" />
     <Build Include="queues\publication_queue.sql" />
     <Build Include="queues\publication_service.sql" />
-    <Build Include="procedures\sp_create_message_type.sql" />
     <Build Include="procedures\sp_create_publication.sql" />
     <Build Include="procedures\sp_create_publication_dialog.sql" />
     <Build Include="procedures\sp_create_publication_trigger.sql" />
     <Build Include="procedures\sp_publish_message.sql" />
     <Build Include="tables\articles_ix_2.sql" />
+    <Build Include="procedures\sp_delete_publication.sql" />
+    <Build Include="functions\fn_sql_to_1c_uuid.sql" />
+    <Build Include="tables\articles_ix_0.sql" />
+    <Build Include="tables\publications_ix_0.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="scripts\enable_broker.sql" />

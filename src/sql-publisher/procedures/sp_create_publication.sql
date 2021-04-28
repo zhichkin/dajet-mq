@@ -11,54 +11,38 @@ BEGIN
 	BEGIN TRANSACTION;
 
 		-- create new publication
-		INSERT [publications] ([name]) VALUES (@name);
+		DECLARE @publication_id int;
+		DECLARE @publications TABLE(id int);
+		INSERT [publications] ([name]) OUTPUT inserted.id INTO @publications VALUES (@name);
+		SELECT TOP 1 @publication_id = id FROM @publications;
 
 		-- create new articles
 		INSERT [articles] ([name], [table_name])
-		SELECT a.[name], a.[table_name]
-		  FROM @articles AS a LEFT JOIN [articles] AS t ON a.[name] = t.[name]
+		SELECT a.[name], a.[table_name] FROM @articles AS a LEFT JOIN [articles] AS t ON a.[name] = t.[name]
 		 WHERE t.[name] IS NULL;
 
+		-- create publication to articles relations
+		INSERT [publication_article_usages] ([publication_id], [article_id], [dialog_handle])
+		SELECT @publication_id, t.[id], NULL FROM @articles AS a INNER JOIN [articles] AS t ON a.[name] = t.[name];
+
 		DECLARE @id int = 0;
+		DECLARE @article_id int;
 		DECLARE @table_name nvarchar(128);
-		DECLARE @message_type_name nvarchar(128);
 		DECLARE @count int = (SELECT COUNT(*) FROM @articles);
-		-- message types loop
-		WHILE (@id < @count)
+		WHILE (@id < @count) -- articles loop
 		BEGIN
 			
 			-- get next article
 			SET @id = @id + 1;
-			SELECT @message_type_name = [name], @table_name = [table_name] FROM @articles WHERE [id] = @id;
+			SELECT @article_id = t.[id], @table_name = t.[table_name] FROM @articles AS a INNER JOIN [articles] AS t ON a.[name] = t.[name] WHERE a.[id] = @id;
 
-			-- create message type
-			EXECUTE sp_create_message_type @message_type_name;
+			-- create publication dialog
+			EXECUTE sp_create_publication_dialog @article_id, @publication_id;
 
 			-- create publication trigger
 			EXECUTE sp_create_publication_trigger @table_name;
 
-		END; -- message types loop
-
-		-- create contract
-		DECLARE @message_types nvarchar(max);
-		SELECT @message_types = COALESCE(@message_types + ', [' + [name] + '] SENT BY ANY', '[' + [name] + '] SENT BY ANY') FROM @articles;
-		EXECUTE('CREATE CONTRACT [' + @name + '] (' + @message_types + ');');
-
-		-- alter publication service to use new contract
-		EXECUTE(N'ALTER SERVICE [publication_service] (ADD CONTRACT [' + @name + N']);');
-
-		SET @id = 0;
-		-- message types loop
-		WHILE (@id < @count)
-		BEGIN
-			-- get next article
-			SET @id = @id + 1;
-			SELECT @message_type_name = [name] FROM @articles WHERE [id] = @id;
-
-			-- create publication dialog
-			EXECUTE sp_create_publication_dialog @message_type_name, @name;
-
-		END; -- message types loop
+		END; -- articles loop
 
 	COMMIT TRANSACTION;
 	END TRY

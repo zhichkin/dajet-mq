@@ -1,13 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[sp_create_publication_dialog]
-	@article_name nvarchar(128),
-	@publication_name nvarchar(128)
+	@article_id int,
+	@publication_id int
 AS
 BEGIN
 	SET NOCOUNT ON;
 
-	IF EXISTS(SELECT 1 FROM [publication_dialogs]
-			   WHERE [article_name] = @article_name
-			     AND [publication_name] = @publication_name) RETURN 0;
+	IF EXISTS(SELECT 1 FROM [publication_article_usages] WHERE [article_id] = @article_id AND [publication_id] = @publication_id) RETURN 0;
 
 	DECLARE @dialog_handle uniqueidentifier;
 
@@ -28,11 +26,11 @@ BEGIN
 	BEGIN DIALOG @handle_out
 	FROM SERVICE [publication_service]
 	  TO SERVICE ''publication_service'', ''CURRENT DATABASE''
-	 ON CONTRACT [' + @publication_name + N'] WITH ENCRYPTION = OFF;';
+	 ON CONTRACT [DEFAULT] WITH ENCRYPTION = OFF;';
 	
 	EXECUTE sp_executesql @sql, N'@handle_out uniqueidentifier OUTPUT', @handle_out = @dialog_handle OUTPUT;
 
-	INSERT [publication_dialogs] ([article_name], [publication_name], [dialog_handle])
-	VALUES (@article_name, @publication_name, @dialog_handle);
+	INSERT [publication_article_usages] ([article_id], [publication_id], [dialog_handle])
+	VALUES (@article_id, @publication_id, @dialog_handle);
 
 END;

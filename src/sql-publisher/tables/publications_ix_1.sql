@@ -1,1 +1,1 @@
-﻿CREATE UNIQUE CLUSTERED INDEX [ix_publications_1] ON [dbo].[publications] ([name] ASC);
+﻿CREATE UNIQUE NONCLUSTERED INDEX [ix_publications_1] ON [dbo].[publications] ([name] ASC);

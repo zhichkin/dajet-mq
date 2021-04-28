@@ -1,0 +1,1 @@
+﻿CREATE UNIQUE CLUSTERED INDEX [ix_articles_0] ON [dbo].[articles] ([id] ASC);
